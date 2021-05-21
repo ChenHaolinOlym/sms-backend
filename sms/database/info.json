@@ -1,0 +1,98 @@
+{
+    "Chorus": {
+        "Choir": [
+            "Soprano",
+            "Alto",
+            "Tenor",
+            "Bass",
+            "Choir"
+        ],
+        "Piano": [
+            "Piano"
+        ],
+        "Percussion": [
+            "Drum"
+        ],
+        "Conductor": [
+            "All"
+        ]
+    },
+    "Orchestra": {
+        "String": [
+            "Violin",
+            "Viola",
+            "Cello",
+            "Contrabass",
+            "Harp"
+        ],
+        "Woodwinds": [
+            "Flute",
+            "Piccolo",
+            "Alto Flute",
+            "Cor Anglais",
+            "Bass Oboe",
+            "Oboe",
+            "Bb Clarinet",
+            "Eb Clarinet",
+            "Basset Horn",
+            "Bass Clarinet",
+            "Bassoon",
+            "Contrabass Clarinet",
+            "Contrabassoon",
+            "Sopranissimo Saxophone",
+            "Sopranino Saxophone",
+            "Soprano Saxophone",
+            "Alto Saxophone",
+            "Tenor Saxophone",
+            "Baritone Saxophone",
+            "Bass Saxophone",
+            "Contrabass Saxophone",
+            "Subcontrabass Saxophone"
+        ],
+        "Brass": [
+            "Horn",
+            "Wagner Tuba",
+            "Trumpet",
+            "Trombone",
+            "Cornet",
+            "Piccolo Trumpet",
+            "Bass Trumpet",
+            "Flugelhorn",
+            "Alto Trombone",
+            "Tenor Trombone",
+            "Tuba",
+            "Baritone Horn",
+            "Euphonium"
+        ],
+        "Percussion": [
+            "Timpani",
+            "Snare Drum",
+            "Tenor Drum",
+            "Bass Drum",
+            "Cymbals",
+            "Triangle",
+            "Tam-Tam",
+            "Tambourine",
+            "Wood Block",
+            "Glockenspiel",
+            "Xylophone",
+            "Vibraphone",
+            "Marimba",
+            "Crotales",
+            "Tubular Bells",
+            "Mark Tree",
+            "Sleigh Bells",
+            "Bell Tree"
+        ],
+        "Keyboards": [
+            "Piano",
+            "Pipe Organ",
+            "Harpsicord",
+            "Accordin",
+            "Celesta"
+        ],
+        "Conductor": [
+            "All"
+        ]
+    }
+}

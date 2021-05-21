@@ -8,6 +8,7 @@ from werkzeug.utils import import_string
 import os, logging
 
 from .logger import init_logger
+from .database import db, create_everything
 
 def create_app(mode="production") -> Flask:
     """Fatory function to initiallize the app
@@ -29,11 +30,19 @@ def create_app(mode="production") -> Flask:
     init_logger(app)
     logger = logging.getLogger(__name__)
 
-    # Check files folders
+    # initiallize database
+    db.init_app(app)
+
+    # Check whether files folder exists
     if not os.path.isdir(app.config["FILES_DIR"]):
         logger.warning("No file folder is found")
         os.mkdir(app.config["FILES_DIR"])
         logger.info(f'Create new file folder at {app.config["FILES_DIR"]}')
+
+    # Check whether database exists
+    if not os.path.exists(os.path.join("sms", app.config['DB_FILE'])) and not app.config['TESTING']:
+        app.app_context().push()
+        create_everything(db)
 
     # Base Routes
     @app.get('/')

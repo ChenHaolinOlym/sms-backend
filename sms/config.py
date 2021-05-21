@@ -2,6 +2,7 @@
 """
     Configs of the system
 """
+import os
 
 class Config(object):
     # Custom configs
@@ -18,6 +19,15 @@ class Config(object):
     # Flask configs
     DEBUG = False
     TESTING = False
+
+    # Secret key from environ
+    SECRET_KEY = os.environ.get("SECRET_KEY")
+
+    # SqlAlchemy configs
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    @property
+    def SQLALCHEMY_DATABASE_URI(self):
+        return f"sqlite:///{self.DB_FILE}"
 
 class DevelopmentConfig(Config):
     DEBUG = True
