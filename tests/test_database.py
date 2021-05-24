@@ -97,7 +97,7 @@ class TestModel:
             "created_time": dt,
             "format": "test_format",
             "name": "test",
-            "type": "test_type"
+            "type": 0
         }
         # Inserts
         file = File(**file_args)
@@ -112,7 +112,7 @@ class TestModel:
         assert test_file.created_time == dt
         assert test_file.format == "test_format"
         assert test_file.name == "test"
-        assert test_file.type == "test_type"
+        assert test_file.type == 0
         assert test_file.hash_id == Hashids(app.config["SECRET_KEY"]).encode(test_file.id)
         db.session.rollback()
 
@@ -134,7 +134,6 @@ class TestModel:
         file_args = {
             "created_time": dt,
             "format": "test_format",
-            "filename": "test_filename",
             "name": "test",
             "type": "test_type"
         }
