@@ -173,8 +173,7 @@ class Piece(db.Model):
             "opus": self.opus,
             "type": self.type,
             "copyright_expire_date": self.copyright_expire_date,
-            "created_time": self.created_time,
-            "modified_time": self.modified_time
+            "created_time": self.created_time
         })
 
 # Middle table for Events & Pieces
@@ -246,7 +245,6 @@ class File(db.Model):
     hash_id = db.Column(db.Text, index=True, default="", nullable=False)
     created_time = db.Column(db.DateTime, default=datetime.now())
     format = db.Column(db.Text)
-    filename = db.Column(db.Text)
     name = db.Column(db.String, nullable=False)
     type = db.Column(db.Integer, default=0)
     # Foreign Keys
@@ -261,7 +259,6 @@ class File(db.Model):
             "hash_id": self.hash_id,
             "created_time": self.created_time,
             "format": self.format,
-            "filename": self.filename,
             "name": self.name,
             "type": self.type
         })

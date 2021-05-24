@@ -22,7 +22,7 @@ from sms.database import (
 )
 
 class TestModel:
-    def test_base_info(self, db:SQLAlchemy):
+    def test_base_info(self, db:SQLAlchemy) -> None:
         # Inserts
         group = Group(name="test")
         part = Part(name="test")
@@ -44,7 +44,7 @@ class TestModel:
         assert test_instrument.name == "test"
         db.session.rollback()
 
-    def test_event_and_piece(self, db:SQLAlchemy):
+    def test_event_and_piece(self, db:SQLAlchemy) -> None:
         dt = datetime.now()
         event_args = {
             "name": "test"
@@ -91,12 +91,11 @@ class TestModel:
             assert test_event.events_pieces[i].order == test_piece.events_pieces[i].order
         db.session.rollback()
 
-    def test_file(self, db:SQLAlchemy, app:Flask):
+    def test_file(self, db:SQLAlchemy, app:Flask) -> None:
         dt = datetime.now()
         file_args = {
             "created_time": dt,
             "format": "test_format",
-            "filename": "test_filename",
             "name": "test",
             "type": "test_type"
         }
@@ -112,13 +111,12 @@ class TestModel:
         assert test_file.id == 1
         assert test_file.created_time == dt
         assert test_file.format == "test_format"
-        assert test_file.filename == "test_filename"
         assert test_file.name == "test"
         assert test_file.type == "test_type"
         assert test_file.hash_id == Hashids(app.config["SECRET_KEY"]).encode(test_file.id)
         db.session.rollback()
 
-    def test_relationships(self, db:SQLAlchemy):
+    def test_relationships(self, db:SQLAlchemy) -> None:
         dt = datetime.now()
         event_args = {
             "name": "test"
