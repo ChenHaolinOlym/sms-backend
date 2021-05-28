@@ -8,6 +8,7 @@ from flask import Flask
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 from hashids import Hashids
+from _pytest.fixtures import SubRequest
 
 from sms.database import (
     Group,
@@ -22,6 +23,14 @@ from sms.database import (
 )
 
 class TestModel:
+    @pytest.fixture(scope="function", autouse=True)
+    def prepare_db(self, db:SQLAlchemy, request:SubRequest):
+        def fin():
+            db.drop_all()
+            db.create_all()
+            db.session.commit()
+        request.addfinalizer(fin)
+
     def test_base_info(self, db:SQLAlchemy) -> None:
         # Inserts
         group = Group(name="test")
@@ -104,7 +113,7 @@ class TestModel:
         transpose = Transpose()
         file.transpose = transpose
         db.session.add(file)
-        db.session.flush()
+        db.session.commit()
         # Queries
         test_file = File.query.filter_by(name="test").first()
         # Asserts
@@ -114,7 +123,6 @@ class TestModel:
         assert test_file.name == "test"
         assert test_file.type == 0
         assert test_file.hash_id == Hashids(app.config["SECRET_KEY"]).encode(test_file.id)
-        db.session.rollback()
 
     def test_relationships(self, db:SQLAlchemy) -> None:
         dt = datetime.now()

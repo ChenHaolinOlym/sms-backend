@@ -286,5 +286,10 @@ class Transpose(db.Model):
 # Hooks
 @event.listens_for(File, 'after_insert')
 def add_hash(mapper, connection, target):
+    file_table = mapper.local_table
     hashid = Hashids(current_app.config["SECRET_KEY"])
-    target.hash_id = hashid.encode(target.id)
+    connection.execute(
+        file_table.update().
+            values(hash_id=hashid.encode(target.id)).
+            where(file_table.c.id==target.id)
+    )
