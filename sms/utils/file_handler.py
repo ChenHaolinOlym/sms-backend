@@ -17,15 +17,11 @@ def check_piece(piece: Piece) -> bool:
     with current_app.app_context():
         try:
             root, dirs, files = next(os.walk(current_app.config["FILES_DIR"], topdown=True))
-            print(root)
-            print(dirs)
-            print(files)
             for dir in dirs:
                 if secure_filename(piece.name) == dir:
                     return False
             return True
         except (IndexError, StopIteration):
-            print("inExcept")
             return True
 
 def check_file(info: File) -> bool:
@@ -36,7 +32,7 @@ def check_file(info: File) -> bool:
         try:
             root, dirs, files = next(os.walk(os.path.join(current_app.config["FILES_DIR"], secure_filename(info.instrumentations[0].piece.name)), topdown=True))
             for file in files:
-                if get_filename(info) == file:
+                if "_".join(get_filename(info).split("_")[:-1]) == "_".join(file.split("_")[:-1]):
                     return False
             return True
         except (IndexError, StopIteration):
@@ -81,3 +77,7 @@ def delete_file(file: File):
         return True
     else:
         return False
+
+def rename_piece(original_name: str, new_name: str):
+    """Rename the piece folder name"""
+    os.rename(os.path.join(current_app.config["FILES_DIR"], secure_filename(original_name)), os.path.join(current_app.config["FILES_DIR"], secure_filename(new_name)))

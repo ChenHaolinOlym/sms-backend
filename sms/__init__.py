@@ -9,6 +9,7 @@ import os, logging
 
 from .logger import init_logger
 from .database import db, create_everything
+from .interface import api, register_blueprints
 
 def create_app(mode="production") -> Flask:
     """Fatory function to initiallize the app
@@ -22,7 +23,7 @@ def create_app(mode="production") -> Flask:
         cfg = import_string('sms.config.DevelopmentConfig')()
     elif mode == "testing":
         cfg = import_string('sms.config.TestingConfig')()
-    elif mode == "production":
+    else: # Production
         cfg = import_string('sms.config.ProductionConfigConfig')()
     app.config.from_object(cfg)
 
@@ -32,6 +33,10 @@ def create_app(mode="production") -> Flask:
 
     # initiallize database
     db.init_app(app)
+
+    # init interface
+    api.init_app(app)
+    register_blueprints()
 
     # Check whether files folder exists
     if not os.path.isdir(app.config["FILES_DIR"]):

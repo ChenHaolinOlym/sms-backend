@@ -29,6 +29,20 @@ class Config(object):
     def SQLALCHEMY_DATABASE_URI(self):
         return f"sqlite:///{self.DB_FILE}"
 
+    # API Configs
+    API_TITLE = 'SMS'
+    API_VERSION = 'v1'
+    OPENAPI_VERSION = '3.0.2'
+
+    # Api documentation configs
+    OPENAPI_URL_PREFIX = "/api/description/"
+    OPENAPI_JSON_PATH = "/openapi.json"
+    OPENAPI_REDOC_PATH = "/redoc/"
+    OPENAPI_REDOC_URL = "https://rebilly.github.io/ReDoc/releases/v1.22.3/redoc.min.js"
+    OPENAPI_SWAGGER_UI_PATH = "/swaggerui/"
+    OPENAPI_SWAGGER_UI_URL = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
+    OPENAPI_SWAGGER_UI_CONFIG = {'deepLinking': True, 'supportedSubmitMethods': ['get', 'post']}
+
 class DevelopmentConfig(Config):
     DEBUG = True
 

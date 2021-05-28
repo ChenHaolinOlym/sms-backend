@@ -10,5 +10,6 @@ from .file_handler import (
     create_piece,
     save_file,
     delete_file,
-    delete_piece
+    delete_piece,
+    rename_piece
 )
