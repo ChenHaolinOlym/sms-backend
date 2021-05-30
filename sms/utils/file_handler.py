@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-    Handlers for file input
+    Handlers for file input and output
 """
 
 import os, shutil
@@ -32,7 +32,7 @@ def check_file(info: File) -> bool:
         try:
             root, dirs, files = next(os.walk(os.path.join(current_app.config["FILES_DIR"], secure_filename(info.instrumentations[0].piece.name)), topdown=True))
             for file in files:
-                if "_".join(get_filename(info).split("_")[:-1]) == "_".join(file.split("_")[:-1]):
+                if strip_name(get_filename(info)) == strip_name(file):
                     return False
             return True
         except (IndexError, StopIteration):
@@ -81,3 +81,8 @@ def delete_file(file: File):
 def rename_piece(original_name: str, new_name: str):
     """Rename the piece folder name"""
     os.rename(os.path.join(current_app.config["FILES_DIR"], secure_filename(original_name)), os.path.join(current_app.config["FILES_DIR"], secure_filename(new_name)))
+
+def strip_name(name: str):
+    """strip the hash id part of the filename"""
+    format = name.split(".")[1]
+    return "_".join(name.split("_")[:-1])+"."+format
