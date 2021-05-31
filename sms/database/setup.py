@@ -33,5 +33,6 @@ def create_everything(db:SQLAlchemy) -> None:
                     part.instruments.append(instrument)
                 group.parts.append(part)
             db.session.add(group)
+        db.session.commit()
 
     logger.info("Database created by config")
